@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames GRANDE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="fundo_padrao"
+        style="z-index: -1;background-image: url(&quot;https://cdn2.codenames.game/cno/2023-12-19/img/bg-raster.svg&quot;);mix-blend-mode: overlay; filter: blur(3px);">
+    </div>
+
+    <div class="container">
+        <h1>Codenames GRANDE</h1>
+        <form id="entrarSala" onsubmit="return iniciar(event)">
+            <div class="inputGroup">
+                <label for="nickname">
+                    <span>Nickname:</span>
+                    <input type="text" id="nickname" placeholder="Digite seu nickname" required maxlength="30">
+                </label>
+            </div>
+            <div class="inputGroup">
+                <label for="senhaSala">
+                    <span>Seed da sala:</span>
+                    <input type="text" id="seedSala" placeholder="Digite a seed da sala" required maxlength="9">
+                </label>
+            </div>
+            <button type="submit">Iniciar Jogo</button>
+        </form>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nicknameInput = document.getElementById("nickname");
+            const seedInput = document.getElementById("seedSala");
+
+            // Salvar o valor no localStorage sempre que o usuário digitar algo
+            nicknameInput.addEventListener("input", function () {
+                localStorage.setItem("nickname", nicknameInput.value);
+            });
+            seedInput.addEventListener("input", function () {
+                localStorage.setItem("seedSala", seedInput.value);
+            });
+
+            // Recuperar os valores do localStorage quando a página for carregada
+            const nicknameSalvo = localStorage.getItem("nickname");
+            const seedSalva = localStorage.getItem("seedSala");
+
+            if (seedSalva && nicknameSalvo) {
+                nicknameInput.value = nicknameSalvo;  // Preencher o campo com o valor salvo
+                seedInput.value = seedSalva;  // Preencher o campo com o valor salvo
+            }
+        });
+
+
+        function iniciar(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            var nick = document.getElementById("nickname").value;
+            var seed = document.getElementById("seedSala").value;
+            if (nick && seed) {
+                var credenciais = [nick, seed];
+                localStorage.setItem('Credenciais_usuario_e_sala', JSON.stringify(credenciais)); // Salvar array no localStorage
+                window.location.href = "codenames.html"; // Redireciona para a nova página
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+
+
+
+
+            //               QUANTO AS PALAVRAS E CORES:
+            // OK   envia de alguma forma a seed para a pagina game.html
+            // OK   a pagina recebe a seed, e ela tem a lista de palavras no JS,  e com a seed ela sorteia as palavras e as cores, de acordo com o numero de palavras (inicialmente 36)
+            // OK   (que sao sempre as mesmas com essa seed, se mudar 1 digito da seed muda completamente as palavras).
+            // OK   A seed pode ser qualquer numero de 9 caracteres.
+            // OK   Para qualquer seed diferente, a combinação de palavras são diferentes.
+            // OK   A seed também define as cores das palavras  
+            //     T        A         V            B         P
+            //     25  ( 8 AZUL   8 VERMELHA   8 BRANCA   1 PRETA )
+            //     36  ( 12 AZUL   12 VERMELHA   11 BRANCA   1 PRETA )
+            //     49  ( 16 AZUL   16 VERMELHA   15 BRANCA   2 PRETA )
+            //     64  ( 21 AZUL   21 VERMELHA   19 BRANCA   3 PRETA )
+            // OK   ele também embaralha uma lista aleatoriamente (de acordo com a seed) [A,A,A,A,A,A,A,A,V,V,V,V,V,V,V,V,B,B,B,B,B,B,B,B,P]
+            // OK   a ordem que ele embaralhar essa lista é as cores das palavras
+            // OK   esse embaralhamento tambem é relacionado a seed (mesmo embaralhamento sempre para a mesma seed, mas diferentes para seed diferentes)
+            // OK   o site pega essas listas e mostra nas cartas as palavras e as cores, na ordem cronologica
+            // OK   e também cria uma lista com as palavras para cada cor...  para posteriromente analisar  
+
+            // OK   chat
+
+            //              QUANTO AOS PLAYERS e como ele vai identificar e exibir quais estao em cada posição:
+            // OK   Ao clicar em iniciar, é enviado o seu nickname ao site do game.html, e ele armazena seu nick em uma variavel.
+            // OK   depois, o jogador é colocado automaticamente em Agente Azul, até ele trocar.
+            // OK   e é enviado a um php (diferente que o anteriro) uma lista ['nicknameA', 'Azul_espiao', 1].
+            // e também toda vez que o usuario for mudar de posição ele manda essa lista com seu nickname, a posição e o 2 (manda um numero acrescentado 1, para que o php de prioridade a essa posição desse nickname e apague do numero menor)
+            // para mudar de cargo, quando clicar em qualquer dos 4 cargos, ele vai mandar esse    ['nicknameA', 'Azul_espiao', 1] ao php,
+            // o php recebe isso,  recebe os dados de um arquivo  .txt  que tem algo parecido com isso:
+            // times = {
+            //     Azul_espiao: [],
+            //     Azul_agente: [],
+            //     Vermelho_espiao: [],
+            //     Vermelho_agente: [],
+            // }
+            // verifica em todos os itens do objeto se tem alguma string igual a nicknameA:
+            // SE NAO:  ele armazena 'nicknameA' e 1 em Azul_espiao e fica assim:
+            // times = {
+            //     Azul_espiao: [['nicknameA', 1]],
+            //     Azul_agente: [],
+            //     Vermelho_espiao: [],
+            //     Vermelho_agente: [],
+            // }
+            // e salva isso novamente no .txt,  e manda de volta esse objeto ao JS do game.html
+
+            // Dentro do JS mesmo, ele vai reconhecer se tem algum jogador em Espiao e acusar que nao pode mais que 1.
+
+            // SE SIM:   ele pega o elemento todo (  nickname e o numero ), atribui a uma variavel,  compara qual o maior numero:
+            // SE O NOVO É MAIOR:  ele apaga o nicknameA e o numero daquela posição, e poe o nicknameA com o numero novo na posição nova.
+            // SE O NOVO É MENOR OU IGUAL:  nada.
+            // e salva isso novamente no .txt,  e manda de volta esse objeto ao JS do game.html
+
+            // o JS do site recebe esse objeto com seu nome ou com varios nomes,  e cria um objeto igual mas em JS;
+            // e entao ele verifica se o seu nick que ta armazenado em uma variavel é igual a um dos nick do objeto, e qual cargo
+            // e dá a voce a função do seu cargo.
+            // Se voce é espião, aparece o div que contem o input de texto e input de numero, e um botão de enviar (esse div permanece independentemente se é a sua rodada ou não, mas quando nao for, ele desabilita o botao de enviar)
+
+
+            // quando voce envia, ....
+
+            //              QUANTO A RECONHECER SE JÁ ENVIOU PALAVRA, OU TERMINOU TURNO OU NAO:
+            //  
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

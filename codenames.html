@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames GRANDE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="estilos.css"> -->
+    <style>
+        body {
+            font-family: 'Varela Round', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #00000052;
+            width: 100%;
+            color: white;
+            padding-top: 4px;
+            padding-bottom: 8px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: -12px;
+        }
+
+        header button {
+            width: auto;
+            color: black;
+            font-size: 13px;
+            padding: 5px;
+            padding-left: 40px;
+            padding-right: 40px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+
+
+
+        .slider_box {
+            margin-right: 50px;
+            height: 10px;
+            width: 320px;
+            padding: 10px;
+            background-color: #FFE400;
+            border: solid 1px #FFE400;
+            border-top: solid 2px #FFF6A7;
+            border-bottom: solid 2px #F3BB00;
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            --tw-shadow: 0 4px 0 0 rgb(224 183 0);
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 100px;
+            font-size: 12px;
+            font-family: "Varela Round", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            transition: background-color .2s;
+        }
+
+
+
+        #zoomSlider {
+            -webkit-appearance: none;
+            width: 150px;
+            height: 3px;
+            /* Trilho com 1px de altura */
+            background: black;
+            /* Cor do trilho */
+            border-radius: 50px;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            border: #0000 0px;
+        }
+
+
+        #zoomSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 8px;
+            /* Largura da bolinha */
+            height: 8px;
+            /* Altura da bolinha */
+            background: black;
+            /* Cor da bolinha */
+            border-radius: 50%;
+            /* Bolinha redonda */
+            cursor: pointer;
+
+        }
+
+        #zoomSlider::-moz-range-thumb {
+            width: 8px;
+            /* Largura da bolinha */
+            height: 8px;
+            /* Altura da bolinha */
+            background: black;
+            /* Cor da bolinha */
+            border-radius: 50%;
+            /* Bolinha redonda */
+            cursor: pointer;
+        }
+
+
+        .jogo {
+            display: flex;
+            height: calc(100% - 60px);
+            width: 100%;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        .coluna {
+            display: flex;
+            flex-direction: column;
+            width: 270px;
+            padding: 10px;
+            margin-top: -50px;
+        }
+
+        .coluna-central {
+            display: grid;
+            gap: 10px;
+            align-content: center;
+        }
+
+
+        .grid-5x5 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .grid-6x6 {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        .grid-7x7 {
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .grid-8x8 {
+            grid-template-columns: repeat(8, 1fr);
+        }
+
+
+
+
+
+
+        .carta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(238, 234, 208);
+            box-shadow: inset 0px 0px 0px 11px rgb(255 255 255 / 26%);
+            text-align: center;
+            position: relative;
+            width: 120px;
+            height: 70px;
+            border-radius: 13px;
+            cursor: pointer;
+        }
+
+        .carta .escolher {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 25px;
+            height: 25px;
+            background-image: url(https://cdn2.codenames.game/cno/2023-12-19/img/icon/icon_tap_card.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+            transition: all .03s;
+        }
+
+        .escolher:hover {
+            scale: 1.1;
+        }
+
+        .carta .corpo {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 25px;
+            width: calc(100% - 5px);
+            background-color: #ffffffd9;
+            border-radius: 5px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+
+
+
+
+        span {
+            font-weight: 900;
+            font-size: 18px;
+            font-family: system-ui;
+            color: #e5e5e5;
+        }
+
+        hr {
+            border: 1px solid #ffffff29
+        }
+
+        .infoTime,
+        .chat,
+        .relatorio {
+            background-color: white;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .infoTime {
+            padding: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            box-shadow: inset 0px 0px 0px 7px rgb(255 255 255 / 9%);
+            color: #ffffffba;
+            flex: 1;
+        }
+
+        .chat input,
+        .chat button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+
+
+        .chat,
+        .relatorio {
+            padding: 10px;
+            height: 45vh;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 100;
+        }
+
+        .chat h3,
+        .relatorio h3 {
+            margin: 2px 5px 10px;
+            font-size: 1.2rem;
+        }
+
+        .chat-mensagens,
+        .relatorio-mensagens {
+            height: calc(100% - 150px);
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+
+        .relatorio-mensagens {
+            height: calc(100% - 58px);
+        }
+
+        .chat-input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .chat-botao {
+            width: 70px;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 50px;
+            background-color: #FFE400;
+            color: #000000;
+            cursor: pointer;
+            transition: background-color .2s;
+        }
+
+        .chat-botao:hover {
+            background-color: #ffd000;
+        }
+
+
+
+
+
+        .modal {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            padding-top: 15px;
+            border: 1px solid #bfbfbf;
+            border-radius: 25px;
+            box-shadow: -3px 6px 20px 5000px rgb(0 0 0 / 19%);
+            z-index: 2;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .linha {
+            display: flex;
+        }
+
+        /* .escolher {
+
+    right: 0.8px;
+    top: 0.9px;
+    width: 100%;
+    height: 59px;
+    background-image: url(https://cdn2.codenames.game/cno/2023-12-19/img/icon/icon_tap_card.png);
+    transform: scale(0.4);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    margin: 0;
+
+} */
+
+        input {
+            width: 160px;
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 1.0em;
+        }
+
+
+
+
+        select {
+            width: 135px;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 1.0em;
+            resize: none;
+        }
+
+        .linha button {
+            transition: all 0.05s;
+        }
+
+        .linha button:hover {
+            filter: brightness(1.1);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="fundo_padrao"
+        style="z-index: -1;background-image: url(&quot;https://cdn2.codenames.game/cno/2023-12-19/img/bg-raster.svg&quot;);mix-blend-mode: overlay; filter: blur(3px);">
+    </div>
+    </div>
+
+    <header>
+        <div class="slider_box" style="margin-right: 50px;">
+            <label for="zoomSlider" style="position: relative; top: -1px; padding-right: 10px;">Zoom do Tabuleiro:</label>
+            <input type="range" id="zoomSlider" min="80" max="130" value="100" style="width: 150px; position: relative; top: -3px;">
+        </div>
+
+
+        <button id="configurarTime" style="margin-right: 50px;">Configurar Time</button>
+
+        <button id="novaPartida" style="margin-right: 50px;">Iniciar Nova Partida</button>
+
+        <div class="slider_box"
+            style="margin-right: 50px; display: flex; align-items: center; width: 21px; cursor: pointer;"
+            onclick="window.location.href = 'home.html'">
+            <img src="https://static.thenounproject.com/png/3574480-200.png" alt="Icone de zoom" style="width: 22px; height: 22px; margin-right: 10px;">
+        </div>
+    </header>
+
+    <div class="jogo">
+        <!-- Coluna da esquerda -->
+        <div class="coluna">
+            <div class="infoTime" style="background: linear-gradient(to right top, rgb(105 16 0), rgb(204 66 31));">
+                <h3 style="font-weight: 900;
+                font-size: 35px;
+                padding-left: 18.5%;
+                font-family: system-ui;
+                font-style: oblique;
+                margin-top: 5px;
+                margin-bottom: 20px;
+                color: #e5e5e5;">RED PILL</h3>
+                <hr>
+                <p>Cartas faltando: <span id="cartasVermelhas">0</span></p>
+
+                <hr>
+                <p>Espião Mestre:</p>
+                <span id="espioesVermelho"></span>
+                <hr>
+                <p>Agentes de Campo:</p>
+                <span id="agentesVermelho"></span>
+            </div>
+            <div class="chat">
+                <h3>Chat Geral</h3>
+                <div id="chatMensagens" class="chat-mensagens"></div>
+                <input type="text" id="mensagem" placeholder="Digite sua mensagem" class="chat-input" style="width: calc(100% - 16px);
+                font-size: 0.9rem;
+                padding: 7px;">
+                <button id="enviarMensagem" class="chat-botao">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Coluna central com as palavras -->
+        <div class="coluna-central" id="tabuleiroPalavras"> </div>
+
+
+        <!-- Coluna da direita -->
+        <div class="coluna">
+            <div class="infoTime" style="background: linear-gradient(to right top, rgb(0 61 94), rgb(0 116 160));">
+                <h3 style="font-weight: 900;
+                font-size: 35px;
+                padding-left: 17.5%;
+                font-family: system-ui;
+                font-style: oblique;
+                margin-top: 5px;
+                margin-bottom: 20px;
+                color: #e5e5e5;">BLUE PILL</h3>
+                <hr>
+                <p>Cartas faltando: <span id="cartasAzuis">0</span></p>
+                <hr>
+                <p>Espião Mestre:</p>
+                <span id="espioesAzul"></span>
+                <hr>
+                <p>Agentes de Campo:</p>
+                <span id="agentesAzul"></span>
+            </div>
+
+            <div class="relatorio">
+                <h3>Relatório do Jogo</h3>
+                <div id="relatorioConteudo" class="relatorio-mensagens"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modais de configuração -->
+
+    <div id="modalConfigSala" class="modal" style="z-index: 4;">
+        <h3 style="transform: translate(17%, -10%);">Configurações da Sala</h3>
+
+
+        <label for="numeroCartas">Número de Cartas:</label>
+        <select id="numeroCartas">
+            <option value="25">25 Palavras</option>
+            <option value="36" selected>36 Palavras</option>
+            <option value="49">49 Palavras</option>
+            <option value="64">64 Palavras</option>
+        </select>
+
+        <br><br>
+
+        <label for="seed">Seed:</label>
+        <input type="text" id="input_seed" placeholder="Digite a seed da sala" maxlength="9">
+
+        <br><br>
+
+        <button onclick="inicia_partida()" style="margin-bottom: 20px;">Iniciar nova partida</button>
+        <button onclick="fecharModal('modalConfigSala')">Fechar</button>
+    </div>
+
+
+
+
+    <div id="modalConfigTime" class="modal" style="width: 400px; z-index: 4;">
+        <h3 style="transform: translate(25%, -10%);">Configurações dos Times</h3>
+
+        <label for="posicao">Escolha sua posição:</label>
+        <div id="posicao">
+            <div class="linha">
+                <button
+                    style="background: linear-gradient(to right top, rgb(199 30 8), rgb(255 116 85)); color: rgb(0, 0, 0); margin: 10px; --tw-shadow: 0 4px 0 0 #aa2a00;"
+                    onclick="selecionarPosicao('Vermelho_espiao')">Espião</button>
+                <button
+                    style="background: linear-gradient(to right top, rgb(199 30 8), rgb(255 116 85)); color: rgb(0, 0, 0); margin: 10px; --tw-shadow: 0 4px 0 0 #aa2a00;"
+                    onclick="selecionarPosicao('Vermelho_agente')">Agente</button>
+            </div>
+            <br>
+            <div class="linha">
+                <button
+                    style="background: linear-gradient(to right top, rgb(0 149 192), rgb(63 194 230)); color: rgb(0, 0, 0); margin: 10px; --tw-shadow: 0 4px 0 0 #006fa6;"
+                    onclick="selecionarPosicao('Azul_espiao')">Espião</button>
+                <button
+                    style="background: linear-gradient(to right top, rgb(0 149 192), rgb(63 194 230)); color: rgb(0, 0, 0); margin: 10px; --tw-shadow: 0 4px 0 0 #006fa6;"
+                    onclick="selecionarPosicao('Azul_agente')">Agente</button>
+            </div>
+
+
+        </div>
+
+        <!-- carta.style.background = 'linear-gradient(to right top, rgb(0 149 192), rgb(63 194 230))';
+        break;
+    case 'V':
+        carta.style.background = 'linear-gradient(to right top, rgb(199 30 8), rgb(255 116 85))'; -->
+
+        <br><br>
+
+        <button onclick="fecharModal('modalConfigTime')">Fechar</button>
+    </div>
+
+
+
+
+    <script src="chat.js"></script>
+    <script>
+        var lista_de_palavras = ['abacaxi', 'abacate', 'abade', 'abajur', 'abalo', 'abandonar', 'abastecer', 'abduzir', 'abelha', 'aberto',
+            'abrigo', 'abrunho', 'absoluto', 'abster', 'absurdo', 'acender', 'acento', 'aceitar', 'acidente', 'acima',
+            'acordar', 'acorde', 'acrílico', 'adaptação', 'adesivo', 'adivinhar', 'adversário', 'afirmar', 'aflito', 'africano',
+            'água', 'agitado', 'ajudar', 'alegria', 'alergia', 'alvo', 'aluno', 'amigo', 'amável', 'amor',
+            'animal', 'ansioso', 'aparelho', 'aplicar', 'aroma', 'atraso', 'autêntico', 'avançar', 'azul', 'balar',
+            'banco', 'barriga', 'barulho', 'beijo', 'beleza', 'benefício', 'bicicleta', 'bingo', 'biscoito', 'bloco',
+            'bola', 'bonito', 'branco', 'brisa', 'broto', 'buraco', 'cabelo', 'caça', 'cadáver', 'caixa',
+            'calçado', 'calor', 'campo', 'caneta', 'carro', 'carta', 'casaco', 'castelo', 'cavalo',
+            'cesta', 'chave', 'chuva', 'cidade', 'clima', 'coelho', 'colher', 'comida', 'computador', 'corpo',
+            'coração', 'correr', 'couro', 'criança', 'cruz', 'dado', 'dente', 'desenho', 'detalhe', 'dificuldade',
+            'divertido', 'documento', 'dúvida', 'educação', 'elefante', 'energia', 'enviar', 'escada', 'escola', 'espelho',
+            'esporte', 'estrela', 'evidente', 'exemplo', 'faca', 'família', 'festa', 'foto', 'fruta', 'futuro',
+            'gato', 'geladeira', 'ginástica', 'golpe', 'graça', 'grupo', 'guitarra', 'herói', 'história', 'hotel',
+            'idioma', 'imagem', 'importante', 'inglês', 'inteligente', 'janela', 'jogo', 'julho', 'justiça', 'lado',
+            'leão', 'livro', 'lixo', 'lua', 'maçã', 'mágico', 'manteiga', 'matematica', 'medo', 'melhor',
+            'menina', 'mesa', 'milho', 'moeda', 'morango', 'música', 'natureza', 'navio', 'neto', 'novo',
+            'óculos', 'olho', 'opção', 'orgulho', 'ouvido', 'palavra', 'pássaro', 'peixe', 'pelo', 'pente',
+            'perigo', 'pessoa', 'pintura', 'plano', 'polo', 'porcelana', 'praia', 'prato', 'prêmio', 'pular',
+            'quadro', 'rede', 'refrigerante', 'relógio', 'resposta', 'risada', 'rosa', 'sabor', 'sal', 'salário',
+            'secreto', 'selva', 'sentido', 'silêncio', 'simples', 'sino', 'socorro', 'sol', 'sorvete', 'sombra',
+            'telefone', 'tempo', 'terapia', 'tigre', 'tinta', 'título', 'tocar', 'tomar', 'transparente', 'túnel',
+            'urso', 'vaso', 'velho', 'verde', 'viagem', 'vila', 'você', 'voo', 'vulcão', 'xadrez',
+            'xadrez', 'xaxim', 'xaxim', 'zebra', 'zen', 'zumbi', 'abóbora', 'abóbora', 'abrir', 'água',
+            'airbag', 'ajuda', 'alavanca', 'alegria', 'algoritmo', 'alívio', 'anexo', 'aplicativo', 'arco', 'arte',
+            'astronauta', 'atleta', 'balança', 'batalha', 'beijo', 'benefício', 'bisão', 'botão', 'buraco', 'cachorro',
+            'cadastro', 'calça', 'canal', 'capítulo', 'carro', 'casamento', 'chave', 'chuva', 'cidade',
+            'classe', 'coleção', 'comida', 'computador', 'conferência', 'crédito', 'dado', 'desconto', 'desenho', 'detalhe',
+            'divulgação', 'escritório', 'esporte', 'estrela', 'exemplo', 'festa', 'flores', 'fruta', 'futebol',
+            'guitarra', 'história', 'hospital', 'ideia', 'impressora', 'janela', 'jogo', 'leitura', 'melodia',
+            'música', 'natureza', 'nuvem', 'oceano', 'operação', 'palestra', 'papel', 'pesquisa', 'pintura', 'pizza',
+            'placa', 'praia', 'prenda', 'rede', 'relógio', 'reunião', 'saúde', 'sala', 'sentido', 'silêncio',
+            'site', 'som', 'sorteio', 'teatro', 'tempo', 'trabalho', 'universo', 'vacina', 'vôo',
+            'zológico', 'arroz', 'corpo', 'pá', 'vaca', 'sol', 'tigre', 'trabalho', 'mestre', 'super-herói',
+            'cabine', 'escola', 'rádio', 'mesa', 'vídeo', 'reunião', 'plano', 'postagem', 'fato', 'bola', 'tela',
+            'valor', 'chef', 'organizar', 'trono', 'viagem', 'computador', 'música', 'foto', 'tempo', 'universo',
+            'algodão', 'árvore', 'banheiro', 'barraca', 'batata', 'beach', 'bico', 'biscoito', 'bloco', 'blusa',
+            'bola', 'bomba', 'bota', 'brinco', 'broto', 'bufê', 'bule', 'buraco', 'caça',
+            'cadeira', 'café', 'calda', 'caneta', 'carro', 'carta', 'casa', 'celular', 'chave', 'coração',
+            'cravo', 'dado', 'dentista', 'desenho', 'difícil', 'documento', 'escola', 'esporte', 'espada', 'exame',
+            'fileira', 'fogão', 'formiga', 'fumaça', 'galinha', 'jardim', 'jaqueta', 'jogo', 'leitura', 'mágico',
+            'maior', 'manta', 'melancia', 'moeda', 'navio', 'nuvem', 'olho', 'pano', 'parque', 'pasta',
+            'peixe', 'pente', 'piano', 'piscina', 'plano', 'presente', 'quadro', 'rato', 'relógio', 'salgado',
+            'salvavidas', 'seguro', 'senhor', 'telefone', 'tigre', 'tinta', 'toalha', 'túneis', 'unha', 'vidro',
+            'vila', 'vôo', 'zap', 'abajur', 'abóbora', 'alfa', 'angra', 'antigo', 'arroz', 'barato', 'bicicleta',
+            'bola', 'café', 'cerveja', 'chocolate', 'clima', 'computador', 'coração', 'cubo', 'documento', 'dúvida',
+            'energia', 'exame', 'fazer', 'feira', 'feliz', 'fogo', 'garrafa', 'geladeira', 'grama', 'hambúrguer',
+            'médio', 'mistura', 'molho', 'morte', 'nome', 'pasta', 'patente', 'ponto', 'quarto',
+            'roda', 'saco', 'salto', 'salto', 'sombra', 'sorvete', 'suco', 'tênis', 'teto', 'tigre',
+            'trabalho', 'vaca', 'viagem', 'voz', 'xadrez', 'xaxim', 'zebra', 'zero', 'zumbi', 'área',
+            'abanar', 'abóbora', 'abolição', 'acidente', 'acorde', 'agricultura', 'alimentação', 'amanhecer', 'andar', 'aparelho',
+            'apresentar', 'aprender', 'apresentação', 'aplicar', 'atendimento', 'atleta', 'avançado', 'aviso', 'bala', 'banana',
+            'bebida', 'beijo', 'benefício', 'brincadeira', 'bule', 'caneta', 'capítulo', 'carro', 'cesta', 'ciclismo',
+            'coleção', 'computador', 'corredor', 'doutor', 'durante', 'embalagem', 'entregar', 'espaço', 'estrela', 'feliz',
+            'fluído', 'fotografia', 'galeria', 'garagem', 'geladeira', 'inverno', 'jogo', 'lavar', 'música', 'natural',
+            'óculos', 'organização', 'papel', 'piano', 'placa', 'preço', 'prêmio', 'rede', 'relógio', 'roupa', 'sala',
+            'sapato', 'seriado', 'site', 'tênis', 'texto', 'tijolo', 'vacina', 'avô', 'voo'];
+        var cores;
+        var sorteio;
+        var seed;
+        var dados_entrada;
+        var numeroCartas = 36;
+
+
+
+        document.getElementById('novaPartida').addEventListener('click', function () {
+            abrirModal('modalConfigSala');
+        });
+        document.getElementById('configurarTime').addEventListener('click', function () {
+            abrirModal('modalConfigTime');
+        });
+        function abrirModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function fecharModal(id) {
+            document.getElementById(id).classList.remove('active');
+
+            if (id == 'modalConfigSala') {
+                document.getElementById("numeroCartas").value = numeroCartas;
+                document.getElementById("input_seed").value = dados_entrada.seed;
+            }
+        }
+
+
+
+
+        function selecionarPosicao(funcao) {
+            // quando clica no botao, roda essa função
+            // que envia seu nick com a seed e a prioridade para um php semelhante ao criado, mas que recebe também a funcao
+            let prioridade = dados_entrada.prioridade;
+            prioridade = prioridade + 1;
+            dados_entrada.prioridade = prioridade;
+            console.log(dados_entrada);
+            const dataToSend = [dados_entrada.nick, dados_entrada.seed, prioridade, funcao];
+
+            // Envia os dados para o PHP
+            fetch('muda_de_cargo_no_time.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao salvar a sala');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Resposta do servidor:', data);
+                    // Você pode adicionar aqui lógica adicional após a inserção
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+
+
+
+        }
+
+
+
+
+        function inicia_partida() {
+            document.getElementById("modalConfigSala").classList.remove('active');
+            // cria o tabuleiro com o numero de palavras.
+            numeroCartas = parseInt(document.getElementById("numeroCartas").value);
+            sorteio = sortear_palavra_e_cor_com_seed(lista_de_palavras, dados_entrada.seed, numeroCartas);
+            criarTabuleiro();
+        }
+
+
+
+        function criarTabuleiro() {
+            var seed = parseInt(document.getElementById("input_seed").value);
+            var numeroCartas = parseInt(document.getElementById("numeroCartas").value);
+            sorteio = sortear_palavra_e_cor_com_seed(lista_de_palavras, seed, numeroCartas);
+
+
+
+
+            const tabuleiro = document.getElementById("tabuleiroPalavras");
+
+            // Limpar o tabuleiro existente
+            tabuleiro.innerHTML = '';
+
+            // Definir o layout do grid de acordo com o número de palavras
+            tabuleiro.classList.remove("grid-5x5", "grid-6x6", "grid-7x7", "grid-8x8");
+
+            if (numeroCartas === 25) {
+                tabuleiro.classList.add("grid-5x5");
+            } else if (numeroCartas === 36) {
+                tabuleiro.classList.add("grid-6x6");
+            } else if (numeroCartas === 49) {
+                tabuleiro.classList.add("grid-7x7");
+            } else if (numeroCartas === 64) {
+                tabuleiro.classList.add("grid-8x8");
+            } else {
+                console.error('Número de cartas inválido.');
+                return;
+            }
+
+            // Gerar as palavras dinamicamente
+            for (let i = 1; i <= numeroCartas; i++) {
+                const carta = document.createElement('div');
+                carta.classList.add('carta');
+
+                // Criar o cabeçalho com a imagem
+                const cabecalho = document.createElement('div');
+                cabecalho.classList.add('escolher');
+
+                // Criar o corpo com a palavra
+                const corpo = document.createElement('div');
+                corpo.classList.add('corpo');
+                corpo.textContent = sorteio.palavras[i - 1].toUpperCase();
+
+
+
+                // Definir o background-color com base na lista_de_cores
+                switch (sorteio.cores[i - 1]) {
+                    case 'A':
+                        carta.style.background = 'linear-gradient(to right top, rgb(0 149 192), rgb(63 194 230))';
+                        break;
+                    case 'V':
+                        carta.style.background = 'linear-gradient(to right top, rgb(199 30 8), rgb(255 116 85))';
+                        break;
+                    case 'B':
+                        carta.style.background = 'linear-gradient(to right top, rgb(233 197 145), rgb(238 228 216))';
+                        break;
+                    case 'P':
+                        carta.style.background = 'linear-gradient(to right top, rgb(35 35 35), rgb(84 84 84))';
+                        break;
+                    default:
+                        carta.style.background = 'linear-gradient(to right top, #F0D7B3, #F7E1C6)';
+                        break;
+                }
+
+                // Adicionar o cabeçalho e o corpo à carta
+                carta.appendChild(cabecalho);
+                carta.appendChild(corpo);
+
+                tabuleiro.appendChild(carta);
+            }
+        }
+
+
+
+        function inicia_o_jogo(lista_de_palavra, lista_de_cores) {    //inicia com 36 palavras
+            // estabelece algumas config do sistema
+            document.getElementById("input_seed").value = dados_entrada.seed;
+
+
+
+
+            const tabuleiro = document.getElementById("tabuleiroPalavras");
+            tabuleiro.classList.add("grid-6x6");
+
+            // Gerar as palavras dinamicamente
+            for (let i = 1; i <= 36; i++) {
+                const carta = document.createElement('div');
+                carta.classList.add('carta');
+
+                // Criar o cabeçalho com a imagem
+                const cabecalho = document.createElement('div');
+                cabecalho.classList.add('escolher');
+
+                // Criar o corpo com a palavra
+                const corpo = document.createElement('div');
+                corpo.classList.add('corpo');
+                corpo.textContent = lista_de_palavra[i - 1].toUpperCase();
+
+
+                // Definir o background-color com base na lista_de_cores
+                switch (lista_de_cores[i - 1]) {
+                    case 'A':
+                        carta.style.background = 'linear-gradient(to right top, rgb(0 149 192), rgb(63 194 230))'; // Cor para a inicial 'A'
+                        break;
+                    case 'V':
+                        carta.style.background = 'linear-gradient(to right top, rgb(199 30 8), rgb(255 116 85))'; // Cor para a inicial 'A'
+                        break;
+                    case 'B':
+                        carta.style.background = 'linear-gradient(to right top, rgb(233 197 145), rgb(238 228 216))'; // Cor para a inicial 'A'
+                        break;
+                    case 'P':
+                        carta.style.background = 'linear-gradient(to right top, rgb(35 35 35), rgb(84 84 84))'; // Cor para a inicial 'A'
+                        break;
+                    default:
+                        carta.style.background = 'linear-gradient(to right top, #F0D7B3, #F7E1C6)'; // Cor para a inicial 'A'
+                        break;
+                }
+
+                // Adicionar o cabeçalho e o corpo à carta
+                carta.appendChild(cabecalho);
+                carta.appendChild(corpo);
+
+                tabuleiro.appendChild(carta);
+            }
+        }
+
+        window.onload = function () {
+            dados_entrada = receberArray();
+            sorteio = sortear_palavra_e_cor_com_seed(lista_de_palavras, dados_entrada.seed, 36);
+            inicia_o_jogo(sorteio.palavras, sorteio.cores);
+            dados_dos_times = sincroniza_times(dados_entrada);
+        };
+
+
+        setInterval(() => sincroniza_times(dados_entrada), 500);
+
+
+        function sincroniza_times(dados_entrada) {
+
+            fetch('recebe_time.php')
+                .then(response => response.json())
+                .then(data => {
+                    dados_do_time = confirma_a_sala(data, dados_entrada);
+                    atualiza_nomes_players(dados_do_time);
+                    console.log('Todas as salas:', data);
+                    console.log('Nossa sala:', dados_do_time);
+                    return dados_do_time;
+
+                })
+                .catch(error => console.error('Erro ao carregar os times:', error));
+
+
+            function confirma_a_sala(obj1, obj2) {
+                let k;
+                let nossa_sala;
+                for (k = 0; k < obj1.length; k++) {
+                    if (obj1[k].Seed == obj2.seed) {
+                        nossa_sala = obj1[k];
+                    }
+                }
+
+
+                // me insere nessa sala aí.
+                // verificar no php se já existe o meu nick, e comparar o numero.
+                me_inserir_no_time(obj2);
+
+
+                if (nossa_sala) { return nossa_sala; }
+                else { return cria_sala_nova(obj2); }
+
+                // nao encontrou a sala da seed. deve criar uma nova
+                // a sala ta novinha, sem ninguem. formata isso em objeto com a seed, e retorna, para que atualiza os nomes dos players (o meu nick apenas)
+            }
+
+
+
+            function me_inserir_no_time(obj) {
+                // Prepara os dados a serem enviados
+                const dataToSend = [obj.nick, obj.seed, obj.prioridade];
+
+                // Envia os dados para o PHP
+                fetch('se_insere_no_time.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao salvar a sala');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Resposta do servidor:', data);
+                        // Você pode adicionar aqui lógica adicional após a inserção
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                    });
+            }
+
+
+
+
+
+
+            function cria_sala_nova() {
+                var salaNova = {
+                    "Azul_espiao": [],
+                    "Azul_agente": [[dados_entrada.nick, dados_entrada.prioridade]],
+                    "Vermelho_espiao": [],
+                    "Vermelho_agente": [],
+                    "Seed": dados_entrada.seed
+                };
+
+                fetch('cria_sala_nova.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(salaNova)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao salvar a sala');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Sala salva com sucesso:', data);
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                    });
+
+                salaNova = {
+                    "Azul_espiao": [],
+                    "Azul_agente": [[dados_entrada.nick]],
+                    "Vermelho_espiao": [],
+                    "Vermelho_agente": [],
+                    "Seed": dados_entrada.seed
+                };
+
+                return salaNova;
+
+            }
+
+
+
+
+
+
+
+            function atualiza_nomes_players(obj) {
+                if (obj.Azul_espiao.length <= 1) {     // atualiza o elemento html.
+                    document.getElementById("espioesAzul").innerHTML = obj.Azul_espiao;
+                }
+                if (obj.Azul_espiao.length > 1) {      // laço for, para colocar todos os nick em uma string, e atualiza o html.
+                    let stringg = '';
+                    for (let i = 0; i < obj.Azul_espiao.length; i++) {
+                        stringg += `${obj.Azul_espiao[i]}, `;
+                    }
+                    stringg = stringg.slice(0, -2)
+                    document.getElementById("espioesAzul").innerHTML = stringg;
+                }
+
+
+                if (obj.Azul_agente.length <= 1) {     // atualiza o elemento html.
+                    document.getElementById("agentesAzul").innerHTML = obj.Azul_agente;
+                }
+                if (obj.Azul_agente.length > 1) {      // laço for, para colocar todos os nick em uma string, e atualiza o html.
+                    let stringg = '';
+                    for (let i = 0; i < obj.Azul_agente.length; i++) {
+                        stringg += `${obj.Azul_agente[i]}, `;
+                    }
+                    stringg = stringg.slice(0, -2)
+                    document.getElementById("agentesAzul").innerHTML = stringg;
+                }
+
+
+                //////
+
+
+                if (obj.Vermelho_espiao.length <= 1) {     // atualiza o elemento html.
+                    document.getElementById("espioesVermelho").innerHTML = obj.Vermelho_espiao;
+                }
+                if (obj.Vermelho_espiao.length > 1) {      // laço for, para colocar todos os nick em uma string, e atualiza o html.
+                    let stringg = '';
+                    for (let i = 0; i < obj.Vermelho_espiao.length; i++) {
+                        stringg += `${obj.Vermelho_espiao[i]}, `;
+                    }
+                    stringg = stringg.slice(0, -2)
+                    document.getElementById("espioesVermelho").innerHTML = stringg;
+                }
+
+
+                if (obj.Vermelho_agente.length <= 1) {     // atualiza o elemento html.
+                    document.getElementById("agentesVermelho").innerHTML = obj.Vermelho_agente;
+                }
+                if (obj.Vermelho_agente.length > 1) {      // laço for, para colocar todos os nick em uma string, e atualiza o html.
+                    let stringg = '';
+                    for (let i = 0; i < obj.Vermelho_agente.length; i++) {
+                        stringg += `${obj.Vermelho_agente[i]}, `;
+                    }
+                    stringg = stringg.slice(0, -2)
+                    document.getElementById("agentesVermelho").innerHTML = stringg;
+                }
+
+
+
+
+
+            }
+        }
+
+
+
+
+
+        function receberArray() {
+            const arrayRecebido = JSON.parse(localStorage.getItem('Credenciais_usuario_e_sala')); // Recuperar array do localStorage
+            if (arrayRecebido) {
+                var nick = arrayRecebido[0];
+                var seed = arrayRecebido[1];
+
+
+                var dados = {
+                    nick: nick,
+                    seed: seed,
+                    prioridade: 1
+                };
+                return dados;
+            }
+        }
+
+
+
+        function sortear_palavra_e_cor_com_seed(lista, seed, numero_de_palavra) {
+            // Função para gerar um número pseudo-aleatório a partir de uma seed (Mulberry32)
+            function mulberry32(seed) {
+                return function () {
+                    seed |= 0;
+                    seed = seed + 0x6D2B79F5 | 0;
+                    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+                    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+                }
+            }
+
+            // Função para embaralhar uma lista usando uma seed
+            function shuffleWithSeed(array, seed) {
+                const random = mulberry32(seed);
+                let shuffledArray = array.slice(); // Faz uma cópia da lista original
+                for (let i = shuffledArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(random() * (i + 1));
+                    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Troca os elementos
+                }
+                return shuffledArray;
+            }
+
+            let shuffledArray = shuffleWithSeed(lista, seed); // Embaralha a lista
+            var lista_palavras = shuffledArray.slice(0, numero_de_palavra); // Pega os primeiros 'count' números
+
+            if (numero_de_palavra == 25) { cores = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'P']; }
+            if (numero_de_palavra == 36) { cores = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'P']; }
+            if (numero_de_palavra == 49) { cores = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'P', 'P']; }
+            if (numero_de_palavra == 64) { cores = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'P', 'P', 'P']; }
+
+            var lista_cores = shuffleWithSeed(cores, seed);
+
+            // separa cada palavra de cada cor;
+            let palavras_azul = [];
+            let palavras_vermelha = [];
+            let palavras_branca = [];
+            let palavras_preta = [];
+
+            for (let i = 0; i < lista_palavras.length; i++) {
+                switch (lista_cores[i]) {
+                    case 'A':
+                        palavras_azul.push(lista_palavras[i]);
+                        break;
+                    case 'V':
+                        palavras_vermelha.push(lista_palavras[i]);
+                        break;
+                    case 'B':
+                        palavras_branca.push(lista_palavras[i]);
+                        break;
+                    case 'P':
+                        palavras_preta.push(lista_palavras[i]);
+                        break;
+                }
+            }
+
+
+            const sorteio = {
+                palavras: lista_palavras,
+                cores: lista_cores,
+
+                pal_azul: palavras_azul,
+                pal_vermelha: palavras_vermelha,
+                pal_branca: palavras_branca,
+                pal_preta: palavras_preta
+            };
+
+            return sorteio;
+        }
+
+
+
+
+        const zoomSlider = document.getElementById('zoomSlider');
+    const tabuleiro = document.getElementById('tabuleiroPalavras');
+
+    // Evento para ajustar o zoom do tabuleiro conforme o slider é movido
+    zoomSlider.addEventListener('input', function() {
+        const zoomValue = zoomSlider.value;
+        tabuleiro.style.transform = `scale(${zoomValue / 100})  translate(0, 15%)`;
+        tabuleiro.style.height = `72%`;
+    });
+
+
+    
+    </script>
+
+</body>
+
+</html>

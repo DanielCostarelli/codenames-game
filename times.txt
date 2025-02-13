@@ -1,0 +1,432 @@
+[
+    {
+        "Azul_espiao": [
+            [
+                "nicknameA",
+                1
+            ],
+            [
+                "nicknameB",
+                1
+            ]
+        ],
+        "Azul_agente": [
+            [
+                "nicknameC",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [
+            [
+                "nicknameD",
+                1
+            ]
+        ],
+        "Vermelho_agente": [
+            [
+                "nicknameE",
+                1
+            ],
+            [
+                "nicknameF",
+                1
+            ]
+        ],
+        "Seed": 1458
+    },
+    {
+        "Azul_espiao": [
+            [
+                "nicknafdsfmeA",
+                1
+            ]
+        ],
+        "Azul_agente": [
+            [
+                "nicknadmeC",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [
+            [
+                "nicknvxcvameD",
+                1
+            ]
+        ],
+        "Vermelho_agente": [
+            [
+                "nicknweweameE",
+                1
+            ],
+            [
+                "nicknamwereF",
+                1
+            ]
+        ],
+        "Seed": 146545645
+    },
+    {
+        "Azul_espiao": [
+            [
+                "hhjk",
+                1
+            ]
+        ],
+        "Azul_agente": [],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "345511"
+    },
+    {
+        "Azul_espiao": [
+            [
+                "DEIDE COSTA",
+                1
+            ]
+        ],
+        "Azul_agente": [],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "47895"
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "DEIDE COSTAssss",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "4783511"
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "123"
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13d",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "1234"
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "N\u00e3o \u00e9 o Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": "1238"
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ],
+            [
+                "N\u00e3o \u00e9 o Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "N\u00e3o \u00e9 o Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 77789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 7789
+    },
+    {
+        "Azul_espiao": [
+            [
+                "aiaia",
+                2
+            ]
+        ],
+        "Azul_agente": {
+            "1": [
+                "N\u00e3o \u00e9 o Daniel",
+                1
+            ]
+        },
+        "Vermelho_espiao": [
+            [
+                "\ud83e\udd13\ud83e\udd71\ud83e\udd71",
+                2
+            ]
+        ],
+        "Vermelho_agente": [],
+        "Seed": 488
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "aiaia",
+                1
+            ],
+            [
+                "Dacu",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 48811
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "Fg",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [
+            [
+                "Daniel",
+                2
+            ]
+        ],
+        "Vermelho_agente": {
+            "6": [
+                "kamui",
+                12
+            ]
+        },
+        "Seed": 1
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 1
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 125
+    },
+    {
+        "Azul_espiao": [],
+        "Azul_agente": [
+            [
+                "Daniel",
+                1
+            ]
+        ],
+        "Vermelho_espiao": [],
+        "Vermelho_agente": [],
+        "Seed": 125
+    }
+]
