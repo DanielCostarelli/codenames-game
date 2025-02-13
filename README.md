@@ -9,3 +9,6 @@ O sistema de chat funciona, pois é um registro de escrita e leitura de um arqui
 
 O restante das mecanicas e interface eu desisti de fazer.
 Se quiser terminar, por favor faça. Eu adoraria jogar Codenames com mais de 25 palavras!!!
+
+Print da tela do jogo:
+![image](https://github.com/user-attachments/assets/bfba1c1a-d539-4f39-9883-e31bc4973ede)
